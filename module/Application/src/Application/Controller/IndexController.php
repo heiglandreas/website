@@ -9,6 +9,8 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        $parser = $this->getServiceLocator()->get('Application\Service\MarkdownWrapper');
+        $content = $parser->transform($this->getEvent()->getRouteMatch());
+        return array('content' => $content);
     }
 }

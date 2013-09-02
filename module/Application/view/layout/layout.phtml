@@ -9,20 +9,61 @@
         <?php echo $this->headTitle('Zend\Together')->setSeparator(' - ')->setAutoEscape(false); ?>
         <meta name="description" content="Website of the Zend\Together conference">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="../../assets/js/html5shiv.js"></script>
+        <script src="../../assets/js/respond.min.js"></script>
+        <![endif]-->
 
-<?php
+        <?php
     echo $this->headLink()
-        ->prependStylesheet($this->basePath('css/main.css'))
-        ->setIndent(8);
+            ->prependStylesheet($this->basePath('css/bootstrap.css'))
+            ->setIndent(8);
+
+    echo $this->headStyle()
+            ->appendStyle('body { padding-top: 70px; position:relative; }')
+            ->setIndent(8);
 ?>
     </head>
     <body>
-        <header id="header">
+    <a class="sr-only" href="#content">Skip navigation</a>
+        <header id="header" class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+            <div class="container">
+                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Zend\Together</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#was">Was</a></li>
+                            <li><a href="#wann">Wann</a></li>
+                            <li><a href="#wo">Wo</a></li>
+                            <li><a href="#wer">Wer</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                    </div><!-- /.navbar-collapse -->
+                </nav>
+            </div>
         </header>
 
         <?php echo $this->content; ?>
 
         <footer id="footer">
         </footer>
+        <?php
+    echo $this->inlineScript()
+            ->appendFile($this->basePath('js/jquery-2.0.3.min.js'))
+            ->appendFile($this->basePath('js/bootstrap.min.js'))
+            ->setIndent(8);
+?>
     </body>
 </html>
