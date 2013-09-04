@@ -25,20 +25,47 @@
  * @copyright ©2013-2013 Andreas Heigl
  * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
  * @version   0.0
- * @since     02.09.13
+ * @since     03.09.13
  * @link      https://github.com/heiglandreas/
  */
 
-namespace Application\Service;
+namespace Application\Service\Markdown;
 
-
-interface MarkdownParserInterface
+/**
+ * Wraps everything from a h([1-6]) to the next h[\1] into a div with a given class
+ *
+ * @package Application\Service\Markdown
+ */
+class WrapPage implements PostProcessorInterface
 {
-
     /**
-     * @param string $content
+     * The class to add to the wrapper
+     *
+     * @var string $class
      */
-    public function transform($content, $translator);
+    protected $class = null;
+    /**
+     * @param DOMDocument $xml
+     */
+    public function process(\DOMDocument $xml)
+    {
+        $xPath = new \DOMXPath($xml);
+        $nodes = $xPath->query('/html/body/*');
+        $div = null;
+        foreach ($nodes as $node) {
+            if (preg_match('/h[1-6]/', $node->nodeName)) {
+                $div = $xml->createElement('div');
+                if ($this->class) {
+                    $div->setAttribute('class', $this->class);
+                }
+                $node = $node->parentNode->replaceChild($div, $node);
+                $div->appendChild($node);
+            } else if ($div) {
+                $remNode = $node->parentNode->removeChild($node);
+                $div->appendChild($remNode);
+            }
+        }
 
-
+        return $xml;
+    }
 }

@@ -17,12 +17,34 @@ return array(
     'service_manager' => array(
         'invokables' => array(
             'Application\Service\MarkdownWrapper' => 'Application\Service\MarkdownWrapperMichelf',
+            'tocParser'       => 'Application\Service\TocParser',
+        ),
+        'factories' => array(
+            'translator' => 'Zend\I18N\Translator\TranslatorServiceFactory',
+            'Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+        ),
+        '*aliases' => array(
+            ''
         ),
     ),
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController'
         ),
+    ),
+    'translator' => array(
+        'translation_file_patterns' => array(
+            array(
+                'type'     => 'array',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern'  => '%s.php',
+                'text_domain' => __NAMESPACE__,
+            ),
+        ),
+    ),
+    'navigation' => array(
+        // The DefaultNavigationFactory we configured in (1) uses 'default' as the sitemap key
+        'default' => array(),
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,

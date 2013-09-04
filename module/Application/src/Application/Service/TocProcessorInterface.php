@@ -25,20 +25,23 @@
  * @copyright ©2013-2013 Andreas Heigl
  * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
  * @version   0.0
- * @since     02.09.13
+ * @since     03.09.13
  * @link      https://github.com/heiglandreas/
  */
 
 namespace Application\Service;
 
 
-interface MarkdownParserInterface
+use Zend\Navigation\Navigation;
+
+interface TocProcessorInterface
 {
 
     /**
-     * @param string $content
+     * @param \DOMDocument $content
+     * @param \DOMDocument $toc
+     *
+     * @return \DOMDocument
      */
-    public function transform($content, $translator);
-
-
+    public function process(\DOMDocument $content, Navigation $toc);
 }

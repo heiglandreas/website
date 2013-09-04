@@ -1,63 +1,17 @@
 <div class="bs-header" id="content">
     <div class="container">
         <h1>Zend\Together</h1>
-        <p>Over a dozen reusable components built to provide iconography, dropdowns, navigation, alerts, popovers, and much more.</p>
-        <!--
-        <div id="carbonads-container">
-            <div class="carbonad">
-                <div id="azcarbon">
-                    <span class="carbonad-image">
-                        <a href="http://engine.carbonads.com/r?e=eyJhdiI6MTExNjIsImF0IjoxLCJjbSI6MzkzNDksImNoIjoxMjA0LCJjciI6MTAxODk5LCJkaSI6IjUwMTI2ZWEwZDRlMTQ5Nzg5NDU0YWUxODlmMTU1YzYzIiwiZG0iOjEsImZjIjoxNjkzNzgsImZsIjo4MTg2MSwibnciOjM5LCJydiI6MywicHIiOjcsInN0IjozMjM0MSwiem4iOjAsInVyIjoiaHR0cDovL3d3dy5rZW5kb3VpLmNvbS8_dXRtX3NvdXJjZT1DYXJib25BZHMmdXRtX21lZGl1bT1iYW5uZXImdXRtX2NhbXBhaWduPUJTQV9LZW5kb1VJX0NhcmJvbkFkcy1EZXZDb2RlQ2lyY18xMzB4MTAwIn0&amp;s=M7rGaGmf_gf7Nzi0oLIhajVVLq8" title="HTML5/JS Framework" target="_blank">
-                            <img class="carbonad-image carbonad-img" src="http://static.carbonads.com/Advertisers/15e8ef867db44d188313739bf3e8e559.jpg" title="HTML5/JS Framework" alt="HTML5/JS Framework" border="0" height="90" width="120">
-                        </a>
-                    </span>
-                    <span class="carbonad-text">Everything you need to build HTML5 sites &amp; mobile apps.
-                        <a href="http://engine.carbonads.com/r?e=eyJhdiI6MTExNjIsImF0IjoxLCJjbSI6MzkzNDksImNoIjoxMjA0LCJjciI6MTAxODk5LCJkaSI6IjUwMTI2ZWEwZDRlMTQ5Nzg5NDU0YWUxODlmMTU1YzYzIiwiZG0iOjEsImZjIjoxNjkzNzgsImZsIjo4MTg2MSwibnciOjM5LCJydiI6MywicHIiOjcsInN0IjozMjM0MSwiem4iOjAsInVyIjoiaHR0cDovL3d3dy5rZW5kb3VpLmNvbS8_dXRtX3NvdXJjZT1DYXJib25BZHMmdXRtX21lZGl1bT1iYW5uZXImdXRtX2NhbXBhaWduPUJTQV9LZW5kb1VJX0NhcmJvbkFkcy1EZXZDb2RlQ2lyY18xMzB4MTAwIn0&amp;s=M7rGaGmf_gf7Nzi0oLIhajVVLq8">
-                            Get your free trial now!
-                        </a>
-                    </span>
-                    <span class="carbonad-tag">
-                        ads via <a href="http://carbonads.com">Carbon</a>
-                    </span>
-                    <img height="0px" width="0px" border="0" src="http://engine.carbonads.com/i.gif?e=eyJhdiI6MTExNjIsImF0IjoxLCJjbSI6MzkzNDksImNoIjoxMjA0LCJjciI6MTAxODk5LCJkaSI6IjUwMTI2ZWEwZDRlMTQ5Nzg5NDU0YWUxODlmMTU1YzYzIiwiZG0iOjEsImZjIjoxNjkzNzgsImZsIjo4MTg2MSwibnciOjM5LCJydiI6MywicHIiOjcsInN0IjozMjM0MSwiem4iOjB9&amp;s=dB9aD2SouRnFz6eX0Bd6jNI0ofU">
-                </div>
-                <script>var z = document.createElement("script"); z.async = true; z.src = "http://engine.carbonads.com/z/32341/azcarbon_2_1_0_HORIZ"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
-            </div>
-        </div>
-        -->
     </div>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-md-3">
             <div class="hidden-print affix-top" role="complementary">
-
+                <?php echo $this->navigation('Navigation')->menu(); ?>
             </div>
         </div>
         <div class="col-md9" role="main">
             <?php echo $content;?>
-
-            <?php /*
-            <div>
-                <div class="page-header">
-                    <h2 id="was">Was ist Zend\Together</h2>
-                </div>
-                <p>Zend\Together ist eine Konferenz zum Thema ZendFramework.</p>
-                <p>Organisiert durch die Community</p>
-            </div>
-            <div>
-                <div class="page-header">
-                    <h2 id="wann">Wann findet die Zend\Together statt</h2>
-                </div>
-                <p>Die erste Ausgabe von Zend\Together wird am 23. November stattfinden</p>
-            </div>
-            <div>
-                <div class="page-header">
-                    <h2>Wo findet die Zend\Together statt</h2>
-                </div>
-                <p>In Hamburg</p>
-            </div>
- */ ?>
         </div>
     </div>
 </div>

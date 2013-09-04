@@ -32,20 +32,40 @@
 namespace Application\Service;
 
 use Michelf\MarkdownExtra;
+use Application\Service\Markdown\PostprocessorInterface;
 
 class MarkdownWrapperMichelf implements MarkdownParserInterface
 {
     protected $wrapped = null;
+
+    protected $postprocessor = array();
 
     public function __construct()
     {
         $this->wrapped = new MarkdownExtra();
     }
 
-    public function transform($string)
+    public function transform($string, $translator)
     {
-        $string = $this->getContent($string);
-        return $this->wrapped->transform($string);
+        $string = $this->getContent($string, $translator);
+        $string = $this->wrapped->transform($string);
+        if ($this->postprocessor) {
+            $xml = new \DOMDocument();
+            $xml->encoding = "UTF8";
+            $xml->loadHTML($string);
+            foreach ($this->postprocessor as $processor) {
+                $xml = $processor->process($xml);
+            }
+            $string = $xml->saveHTML();
+        }
+        return $string;
+    }
+
+    public function addPostprocessor(PostProcessorInterface $postprocessor)
+    {
+        $this->postprocessor[] = $postprocessor;
+
+        return $this;
     }
 
     public function __set($name, $value)
@@ -58,13 +78,15 @@ class MarkdownWrapperMichelf implements MarkdownParserInterface
         return $this->wrapped->$name;
     }
 
-    public function getContent($request)
+    public function getContent($request, $translator)
     {
         $array = explode('\\', $request->getParam('controller'));
 
         $module     = strtolower($array[0]);
         $controller = strtolower(str_Replace('Controller', '', $array[count($array)-1]));
         $action     = $request->getParam('action');
+        $locale     = $translator->getLocale();
+        $locale     = explode('_', $locale)[0];
 
         $path = 'module'
               . DIRECTORY_SEPARATOR
@@ -76,8 +98,10 @@ class MarkdownWrapperMichelf implements MarkdownParserInterface
               . DIRECTORY_SEPARATOR
               . $controller
               . DIRECTORY_SEPARATOR
-              . $action . '.md';
+              . $action . '.' . $locale . '.md';
 
         return file_get_contents($path);
     }
+
+
 }

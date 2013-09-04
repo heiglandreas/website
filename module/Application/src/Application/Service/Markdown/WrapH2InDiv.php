@@ -25,20 +25,30 @@
  * @copyright ©2013-2013 Andreas Heigl
  * @license   http://www.opesource.org/licenses/mit-license.php MIT-License
  * @version   0.0
- * @since     02.09.13
+ * @since     03.09.13
  * @link      https://github.com/heiglandreas/
  */
 
-namespace Application\Service;
+namespace Application\Service\Markdown;
 
 
-interface MarkdownParserInterface
+class WrapH2InDiv implements PostProcessorInterface
 {
-
     /**
-     * @param string $content
+     * @param DOMDocument $xml
      */
-    public function transform($content, $translator);
+    public function process(\DOMDocument $xml)
+    {
+        $xPath = new \DOMXPath($xml);
+        $nodes = $xPath->query('//h2');
+        foreach ($nodes as $node) {
+            $div = $xml->createElement('div');
+            $h2 = $node->parentNode->replaceChild($div, $node);
+            $div->appendChild($h2);
+            $h2->setAttribute('id', preg_replace('/[^a-z0-9]/', '_', strtolower($h2->textContent)));
+            $div->setAttribute('class', 'page-header');
+        }
 
-
+        return $xml;
+    }
 }
